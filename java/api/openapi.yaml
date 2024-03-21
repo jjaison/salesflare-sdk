@@ -1,0 +1,433 @@
+openapi: 3.1.0
+info:
+  description: ""
+  title: app.salesflare.com
+  version: 1.0.0
+servers:
+- url: /
+paths:
+  /v1/m:
+    post:
+      description: "**Host**: http://api.segment.io"
+      requestBody:
+        content:
+          text/plain: {}
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/_v1_m_post_200_response'
+          description: ""
+      security: []
+      summary: /v1/m
+      x-accepts: application/json
+  /messenger/web/metrics:
+    post:
+      description: "**Host**: http://api-iam.intercom.io"
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/_messenger_web_metrics_post_request'
+      responses:
+        "200":
+          content:
+            text/html: {}
+          description: ""
+          headers:
+            status:
+              explode: false
+              required: false
+              schema:
+                type: string
+              style: simple
+            x-ami-version:
+              explode: false
+              required: false
+              schema:
+                type: string
+              style: simple
+            x-content-type-options:
+              explode: false
+              required: false
+              schema:
+                type: string
+              style: simple
+            x-intercom-version:
+              explode: false
+              required: false
+              schema:
+                type: string
+              style: simple
+            x-request-queueing:
+              explode: false
+              required: false
+              schema:
+                type: string
+              style: simple
+            x-runtime:
+              explode: false
+              required: false
+              schema:
+                type: string
+              style: simple
+      security: []
+      summary: /messenger/web/metrics
+      x-content-type: application/x-www-form-urlencoded
+      x-accepts: text/html
+  /tasks:
+    get:
+      description: "**Host**: http://api.salesflare.com"
+      parameters:
+      - explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: q
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/_tasks_get_200_response_inner'
+                type: array
+          description: ""
+      security:
+      - apikey cookie  gid: []
+      - apikey cookie  hjsessionuser 374224: []
+      - apikey cookie ajs anonymous id: []
+      - apikey cookie intercom-id-nhqftro2: []
+      - apikey cookie intercom-device-id-nhqftro2: []
+      - apikey cookie salesflare-session: []
+      - apikey cookie ajs user id: []
+      - apikey cookie  hjsession 374224: []
+      - apikey cookie intercom-session-nhqftro2: []
+      - apikey header cookie: []
+      summary: /tasks
+      x-accepts: application/json
+    post:
+      description: "**Host**: http://api.salesflare.com"
+      requestBody:
+        content:
+          application/json;charset=UTF-8: {}
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/_tasks_post_200_response'
+          description: ""
+          headers:
+            x-cloud-trace-context:
+              explode: false
+              required: false
+              schema:
+                type: string
+              style: simple
+      security:
+      - apikey cookie  gid: []
+      - apikey cookie  hjsessionuser 374224: []
+      - apikey cookie ajs anonymous id: []
+      - apikey cookie intercom-id-nhqftro2: []
+      - apikey cookie intercom-device-id-nhqftro2: []
+      - apikey cookie salesflare-session: []
+      - apikey cookie ajs user id: []
+      - apikey cookie  hjsession 374224: []
+      - apikey cookie intercom-session-nhqftro2: []
+      - apikey header cookie: []
+      summary: /tasks
+      x-accepts: application/json
+components:
+  schemas:
+    _tasks_get_200_response_inner_email_anyOf:
+      properties:
+        id:
+          type: integer
+        email_message_id:
+          type: string
+        service_message_id:
+          type: string
+        data_source:
+          type: integer
+        subject:
+          type: string
+      required:
+      - data_source
+      - email_message_id
+      - id
+      - service_message_id
+      - subject
+    _v1_m_post_200_response:
+      example:
+        success: true
+      properties:
+        success:
+          type: boolean
+      required:
+      - success
+    _tasks_get_200_response_inner_assignees_inner:
+      example:
+        name: name
+        disabled: true
+        id: 5
+        email: email
+        picture: picture
+      properties:
+        id:
+          type: integer
+        email:
+          type: string
+        picture:
+          type: string
+        name:
+          type: string
+        disabled:
+          type: boolean
+      required:
+      - disabled
+      - email
+      - id
+      - name
+      - picture
+    _tasks_get_200_response_inner:
+      example:
+        creator: 1
+        reminder_date: reminder_date
+        description: description
+        assignees:
+        - name: name
+          disabled: true
+          id: 5
+          email: email
+          picture: picture
+        - name: name
+          disabled: true
+          id: 5
+          email: email
+          picture: picture
+        can_edit: true
+        completed: true
+        last_modified_by: 5
+        creation_date: creation_date
+        type: type
+        completor: ""
+        archived: true
+        archive_date: ""
+        archivor: ""
+        modification_date: modification_date
+        company: ""
+        completion_date: ""
+        id: 0
+        meeting: ""
+        account:
+          name: name
+          id: 6
+          picture: picture
+        email: ""
+      properties:
+        id:
+          type: integer
+        type:
+          type: string
+        account:
+          $ref: '#/components/schemas/_tasks_get_200_response_inner_account'
+        creator:
+          nullable: true
+          type: integer
+        description:
+          type: string
+        reminder_date:
+          type: string
+        email:
+          $ref: '#/components/schemas/_tasks_get_200_response_inner_email'
+        company:
+          nullable: true
+        meeting:
+          nullable: true
+        completed:
+          type: boolean
+        completion_date:
+          nullable: true
+        completor:
+          nullable: true
+        archived:
+          type: boolean
+        archive_date:
+          nullable: true
+        archivor:
+          nullable: true
+        last_modified_by:
+          nullable: true
+          type: integer
+        creation_date:
+          type: string
+        modification_date:
+          type: string
+        assignees:
+          items:
+            $ref: '#/components/schemas/_tasks_get_200_response_inner_assignees_inner'
+          type: array
+        can_edit:
+          type: boolean
+      required:
+      - account
+      - archive_date
+      - archived
+      - archivor
+      - assignees
+      - can_edit
+      - company
+      - completed
+      - completion_date
+      - completor
+      - creation_date
+      - creator
+      - description
+      - email
+      - id
+      - last_modified_by
+      - meeting
+      - modification_date
+      - reminder_date
+      - type
+    _tasks_post_200_response:
+      example:
+        id: 0
+      properties:
+        id:
+          type: integer
+      required:
+      - id
+    _tasks_get_200_response_inner_email:
+      anyOf:
+      - nullable: true
+      - $ref: '#/components/schemas/_tasks_get_200_response_inner_email_anyOf'
+    _tasks_get_200_response_inner_account:
+      example:
+        name: name
+        id: 6
+        picture: picture
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        picture:
+          type: string
+      required:
+      - id
+      - name
+      - picture
+    _messenger_web_metrics_post_request:
+      properties:
+        app_id:
+          type: string
+        v:
+          type: string
+        g:
+          type: string
+        s:
+          type: string
+        r:
+          type: string
+        platform:
+          type: string
+        installation_type:
+          type: string
+        Idempotency-Key:
+          type: string
+        internal:
+          type: string
+        is_intersection_booted:
+          type: string
+        page_title:
+          type: string
+        user_active_company_id:
+          type: string
+        metrics:
+          type: string
+        logs:
+          type: string
+        op_metrics:
+          type: string
+        hc_metrics:
+          type: string
+        referer:
+          type: string
+        anonymous_session:
+          type: string
+        device_identifier:
+          type: string
+      required:
+      - Idempotency-Key
+      - anonymous_session
+      - app_id
+      - device_identifier
+      - g
+      - hc_metrics
+      - installation_type
+      - internal
+      - is_intersection_booted
+      - logs
+      - metrics
+      - op_metrics
+      - page_title
+      - platform
+      - r
+      - referer
+      - s
+      - user_active_company_id
+      - v
+  securitySchemes:
+    apikey cookie  gid:
+      in: cookie
+      name: _gid
+      type: apiKey
+    apikey cookie  hjsessionuser 374224:
+      in: cookie
+      name: _hjsessionuser_374224
+      type: apiKey
+    apikey cookie ajs anonymous id:
+      in: cookie
+      name: ajs_anonymous_id
+      type: apiKey
+    apikey cookie intercom-id-nhqftro2:
+      in: cookie
+      name: intercom-id-nhqftro2
+      type: apiKey
+    apikey cookie intercom-device-id-nhqftro2:
+      in: cookie
+      name: intercom-device-id-nhqftro2
+      type: apiKey
+    apikey cookie salesflare-session:
+      in: cookie
+      name: salesflare-session
+      type: apiKey
+    apikey cookie ajs user id:
+      in: cookie
+      name: ajs_user_id
+      type: apiKey
+    apikey cookie  hjsession 374224:
+      in: cookie
+      name: _hjsession_374224
+      type: apiKey
+    apikey cookie intercom-session-nhqftro2:
+      in: cookie
+      name: intercom-session-nhqftro2
+      type: apiKey
+    apikey header cookie:
+      in: header
+      name: COOKIE
+      type: apiKey
+
